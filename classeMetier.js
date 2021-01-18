@@ -23,23 +23,44 @@ class Voiture{
 
     set majAssurance(nouvAssure){
         this.#assure = nouvAssure;
-        this.#messTab = console.log("votre assurance est mise à jour");
+        this.#messTab = "votre assurance est mise à jour";
     }
     repeindre(couleur){
         if(couleur === this.#couleur){
-            console.log("merci pour ce rafraichissement");
+            this.#messTab = "merci pour ce rafraichissement";
         }else{
             this.#couleur = couleur;
-            console.log("super cette nouvelle couleur!")
+            this.#messTab = "super cette nouvelle couleur!";
         }
     }
     mettreEssence(value){
         if((value + this.#nivEssence) > this.#capReservoir){
-            console.log("ERREUR ! Vous ne pouvez pas mettre plus que la capacité totale de votre réservoir")
+            this.#messTab = "ERREUR ! Vous ne pouvez pas mettre plus que la capacité totale de votre réservoir";
         }else{
             this.#nivEssence += value;
-            console.log("Votre réservoir contient maintenant " + this.#nivEssence + " L sur " + this.#capReservoir + " possible.")
+            this.#messTab = "Votre réservoir contient maintenant " + this.#nivEssence + " L sur " + this.#capReservoir + " possible.";
+            return this.#nivEssence
         }
+    }
+    seDeplacer(distance,vitesseMoyenne){
+        var consommation;
+        if(vitesseMoyenne < 50 && vitesseMoyenne > 0){
+            consommation = distance * 0.1;            
+        }else if (vitesseMoyenne >= 50 && vitesseMoyenne < 90){
+            consommation = distance * 0.05;
+        }else if (vitesseMoyenne >= 90 && vitesseMoyenne < 130){
+            consommation = distance * 0.08;
+        }else{
+            consommation = distance * 0.12;
+        }
+        if(consommation <= this.#nivEssence){
+            this.#messTab = "vous avez consommé " + consommation + " litres.";
+        }else{
+            this.#messTab = "Erreur, le voyage est impossible avec le niveau d'essence déclaré";
+        }
+    }
+    toString(){
+        return "Le numéro d'immatriculation du véhicule est " + this.#immatriculation + ". Sa puissance est de " + this.#puissance + "cvx. Il est de couleur " + this.#couleur + ".";
     }
 }
 
