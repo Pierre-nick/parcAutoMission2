@@ -33,6 +33,14 @@ class Voiture{
             console.log("super cette nouvelle couleur!")
         }
     }
+    mettreEssence(value){
+        if((value + this.#nivEssence) > this.#capReservoir){
+            console.log("ERREUR ! Vous ne pouvez pas mettre plus que la capacité totale de votre réservoir")
+        }else{
+            this.#nivEssence += value;
+            console.log("Votre réservoir contient maintenant " + this.#nivEssence + " L sur " + this.#capReservoir + " possible.")
+        }
+    }
 }
 
 let voiture1 = new Voiture("911 - 911", "orange", 1102, 112, 55, 5);
