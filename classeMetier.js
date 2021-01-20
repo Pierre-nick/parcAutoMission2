@@ -32,6 +32,8 @@ class Voiture{
             this.#couleur = couleur;
             this.#messTab = "super cette nouvelle couleur!";
         }
+        console.log("J'ai utilisé la fonction repeindre, ma couleur est maintenant " + this.#couleur + " message du tableau de bord :");
+        console.log(this.#messTab);
     }
     mettreEssence(value){
         if((value + this.#nivEssence) > this.#capReservoir){
@@ -39,8 +41,9 @@ class Voiture{
         }else{
             this.#nivEssence += value;
             this.#messTab = "Votre réservoir contient maintenant " + this.#nivEssence + " L sur " + this.#capReservoir + " possible.";
-            return this.#nivEssence
         }
+        console.log("jai mis de l'essence avec la fonction mettreEssence, message du tableau de bord:");
+            console.log(this.#messTab);
     }
     seDeplacer(distance,vitesseMoyenne){
         var consommation;
@@ -54,14 +57,35 @@ class Voiture{
             consommation = distance * 0.12;
         }
         if(consommation <= this.#nivEssence){
-            this.#messTab = "vous avez consommé " + consommation + " litres.";
+            this.#messTab = "vous avez consommé " + consommation + " litres. il vous reste " + (this.#nivEssence - consommation) + " litres dans le réservoir";
+            this.#nivEssence = this.#nivEssence - consommation;
         }else{
             this.#messTab = "Erreur, le voyage est impossible avec le niveau d'essence déclaré";
         }
+        console.log("j'ai programmé un voyage avec une distance et une vitesse moyenne, message du tableau de bord :");
+        console.log(this.#messTab);
     }
     toString(){
-        return "Le numéro d'immatriculation du véhicule est " + this.#immatriculation + ". Sa puissance est de " + this.#puissance + "cvx. Il est de couleur " + this.#couleur + ".";
+        return console.log("Le numéro d'immatriculation du véhicule est " + this.#immatriculation + ". Sa puissance est de " + this.#puissance + "cvx. Il est de couleur " + this.#couleur + ".");
     }
 }
 
 let voiture1 = new Voiture("911 - 911", "orange", 1102, 112, 55, 5);
+let voiture2 = new Voiture("118-218 haha","noir","950",90,55,5);
+let voiture3 = new Voiture("123 soleil","vert",1230,155,40,2);
+
+function test(voiture,couleur1,litresEssence,km,vitesse){
+console.log(voiture);
+
+voiture.repeindre(couleur1);
+
+voiture.mettreEssence(litresEssence);
+
+voiture.seDeplacer(km,vitesse);
+
+voiture.toString();
+}
+
+test(voiture1,"bleu",5,160,90);
+test(voiture2,"noir",35,160,90);
+test(voiture3,"jaune",65,20,130);
